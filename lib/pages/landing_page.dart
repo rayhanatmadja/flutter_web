@@ -1,9 +1,54 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
-class LandingPage extends StatelessWidget {
+class LandingPage extends StatefulWidget {
+  @override
+  State<LandingPage> createState() => _LandingPageState();
+}
+
+class _LandingPageState extends State<LandingPage> {
+  int selectedMenu = 0;
+
   @override
   Widget build(BuildContext context) {
+    Widget navItem({
+      String? title,
+      String? imageUrl,
+      int? index,
+    }) {
+      return InkWell(
+        onTap: () {
+          setState(() {
+            selectedMenu = index!;
+          });
+        },
+        child: Column(
+          mainAxisSize: MainAxisSize.min,
+          children: [
+            Text(
+              title!,
+              style: GoogleFonts.poppins(
+                fontSize: 18,
+                fontWeight:
+                    index == selectedMenu ? FontWeight.w500 : FontWeight.w300,
+                color: Color(0xff1D1E3C),
+              ),
+            ),
+            Container(
+              width: 66,
+              height: 2,
+              decoration: BoxDecoration(
+                borderRadius: BorderRadius.circular(20),
+                color: index == selectedMenu
+                    ? Color(0xffFE998D)
+                    : Colors.transparent,
+              ),
+            )
+          ],
+        ),
+      );
+    }
+
     return Scaffold(
         body: Stack(
       children: [
@@ -32,98 +77,30 @@ class LandingPage extends StatelessWidget {
                   ),
                   Row(
                     children: [
-                      Column(
-                        mainAxisSize: MainAxisSize.min,
-                        children: [
-                          Text(
-                            'Guides',
-                            style: GoogleFonts.poppins(
-                              fontSize: 18,
-                              fontWeight: FontWeight.w500,
-                              color: Color(0xff1D1E3C),
-                            ),
-                          ),
-                          Container(
-                            width: 66,
-                            height: 2,
-                            decoration: BoxDecoration(
-                              borderRadius: BorderRadius.circular(20),
-                              color: Color(0xffFE998D),
-                            ),
-                          )
-                        ],
+                      navItem(
+                        title: 'Guides',
+                        index: 0,
                       ),
                       SizedBox(
                         width: 47,
                       ),
-                      Column(
-                        mainAxisSize: MainAxisSize.min,
-                        children: [
-                          Text(
-                            'Pricing',
-                            style: GoogleFonts.poppins(
-                              fontSize: 18,
-                              fontWeight: FontWeight.w300,
-                              color: Color(0xff1D1E3C),
-                            ),
-                          ),
-                          Container(
-                            width: 66,
-                            height: 2,
-                            decoration: BoxDecoration(
-                              borderRadius: BorderRadius.circular(20),
-                              color: Colors.transparent,
-                            ),
-                          )
-                        ],
+                      navItem(
+                        title: 'Pricing',
+                        index: 1,
                       ),
                       SizedBox(
                         width: 47,
                       ),
-                      Column(
-                        mainAxisSize: MainAxisSize.min,
-                        children: [
-                          Text(
-                            'Team',
-                            style: GoogleFonts.poppins(
-                              fontSize: 18,
-                              fontWeight: FontWeight.w300,
-                              color: Color(0xff1D1E3C),
-                            ),
-                          ),
-                          Container(
-                            width: 66,
-                            height: 2,
-                            decoration: BoxDecoration(
-                              borderRadius: BorderRadius.circular(20),
-                              color: Colors.transparent,
-                            ),
-                          )
-                        ],
+                      navItem(
+                        title: 'Team',
+                        index: 2,
                       ),
                       SizedBox(
                         width: 47,
                       ),
-                      Column(
-                        mainAxisSize: MainAxisSize.min,
-                        children: [
-                          Text(
-                            'Stories',
-                            style: GoogleFonts.poppins(
-                              fontSize: 18,
-                              fontWeight: FontWeight.w300,
-                              color: Color(0xff1D1E3C),
-                            ),
-                          ),
-                          Container(
-                            width: 66,
-                            height: 2,
-                            decoration: BoxDecoration(
-                              borderRadius: BorderRadius.circular(20),
-                              color: Colors.transparent,
-                            ),
-                          )
-                        ],
+                      navItem(
+                        title: 'Stories',
+                        index: 3,
                       ),
                     ],
                   ),
@@ -163,8 +140,8 @@ class LandingPage extends StatelessWidget {
 
               Image.asset(
                 'assets/images/cycle.png',
-                width: 763,
-                height: 550,
+                width: 603,
+                height: 390,
               ),
               // NOTE: Footer
               SizedBox(
